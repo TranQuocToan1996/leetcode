@@ -3,8 +3,8 @@ package main
 // https://leetcode.com/problems/add-two-numbers/
 
 /*
-time complexity: O(),  ms
-Space complexity: O(),  MB
+Time complexity: O(n), 	21 ms
+Space complexity: O(n), 4.6 MB
 */
 
 type ListNode struct {
