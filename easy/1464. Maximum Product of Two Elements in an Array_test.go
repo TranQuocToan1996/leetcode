@@ -2,9 +2,10 @@ package easy
 
 import (
 	"fmt"
+	"testing"
 )
 
-func main() {
+func TestMaxiumProd(t *testing.T) {
 
 	tests := [][]int{
 		{3, 4, 5, 2},

@@ -2,9 +2,10 @@ package easy
 
 import (
 	"fmt"
+	"testing"
 )
 
-func main() {
+func TestTwoArrays(t *testing.T) {
 	type twoArr struct {
 		target []int
 		arr    []int

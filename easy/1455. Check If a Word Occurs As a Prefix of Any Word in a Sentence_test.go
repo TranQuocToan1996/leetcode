@@ -3,9 +3,10 @@ package easy
 import (
 	"fmt"
 	"strings"
+	"testing"
 )
 
-func main() {
+func TestWords(t *testing.T) {
 	type word struct {
 		sentence   string
 		searchWord string

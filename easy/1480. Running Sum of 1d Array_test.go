@@ -2,9 +2,10 @@ package easy
 
 import (
 	"fmt"
+	"testing"
 )
 
-func main() {
+func TestSumArrayOneD(t *testing.T) {
 
 	tests := [][]int{
 		{1, 2, 3, 4},

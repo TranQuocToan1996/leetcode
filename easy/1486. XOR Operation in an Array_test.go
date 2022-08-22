@@ -2,9 +2,10 @@ package easy
 
 import (
 	"fmt"
+	"testing"
 )
 
-func main() {
+func TestXOR(t *testing.T) {
 
 	fmt.Println(xorOperation(5, 0))
 	fmt.Println(xorOperation(4, 3))

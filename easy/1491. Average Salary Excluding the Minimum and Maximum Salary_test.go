@@ -2,9 +2,10 @@ package easy
 
 import (
 	"fmt"
+	"testing"
 )
 
-func main() {
+func TestAverageSalary(t *testing.T) {
 	// first checking
 	salaries := [][]int{
 		{4000, 3000, 1000, 2000},

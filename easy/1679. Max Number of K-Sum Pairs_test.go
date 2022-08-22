@@ -3,9 +3,10 @@ package easy
 import (
 	"fmt"
 	"sort"
+	"testing"
 )
 
-func main() {
+func TestMaxKSum(t *testing.T) {
 	type Test struct {
 		nums []int
 		k    int

@@ -2,9 +2,10 @@ package easy
 
 import (
 	"fmt"
+	"testing"
 )
 
-func main() {
+func TestShuffeArray(t *testing.T) {
 	type shuffleArray struct {
 		nums []int
 		n    int

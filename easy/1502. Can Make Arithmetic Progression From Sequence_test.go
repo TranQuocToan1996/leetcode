@@ -3,9 +3,10 @@ package easy
 import (
 	"fmt"
 	"sort"
+	"testing"
 )
 
-func main() {
+func TestCanMakeArithmeticProgression(t *testing.T) {
 	// first checking
 	fmt.Println(canMakeArithmeticProgression([]int{3, 5, 1}))
 	fmt.Println(canMakeArithmeticProgression([]int{1, 2, 4}))

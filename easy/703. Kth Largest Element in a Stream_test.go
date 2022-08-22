@@ -1,8 +1,11 @@
 package easy
 
-import "container/heap"
+import (
+	"container/heap"
+	"testing"
+)
 
-func main() {
+func TestXxx(t *testing.T) {
 
 	// tests := []{
 

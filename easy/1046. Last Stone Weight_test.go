@@ -3,9 +3,10 @@ package easy
 import (
 	"fmt"
 	"sort"
+	"testing"
 )
 
-func main() {
+func TestLastStoneWeight(t *testing.T) {
 
 	tests := [][]int{
 		{2, 7, 4, 1, 8, 1},
