@@ -1,10 +1,11 @@
-package easy
+package medium
 
 import (
 	"fmt"
+	"testing"
 )
 
-func main() {
+func TestSum3(t *testing.T) {
 	type Sum3 struct {
 		arr    []int
 		target int
@@ -33,8 +34,8 @@ func threeSumMulti(arr []int, target int) (ans int) {
 	//https://www.geeksforgeeks.org/modulo-1097-1000000007/
 	const mod = int(1e9 + 7)
 
-	vcnt := make([]int, target+1, target+1)
-	twosumcnt := make([]int, target+1, target+1)
+	vcnt := make([]int, target+1)
+	twosumcnt := make([]int, target+1)
 
 	for _, v := range arr {
 		if v > target {

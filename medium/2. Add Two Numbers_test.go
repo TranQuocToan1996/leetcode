@@ -1,4 +1,4 @@
-package easy
+package medium
 
 // https://leetcode.com/problems/add-two-numbers/
 

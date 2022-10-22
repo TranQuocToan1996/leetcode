@@ -1,20 +1,18 @@
 package easy
 
-import "testing"
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+import (
+	"leetcode/model"
+	"testing"
+)
 
 func TestPalindromeLinkList(t *testing.T) {
-	head1 := &ListNode{
+	head1 := &model.ListNode{
 		Val: 1,
-		Next: &ListNode{
+		Next: &model.ListNode{
 			Val: 2,
-			Next: &ListNode{
+			Next: &model.ListNode{
 				Val: 2,
-				Next: &ListNode{
+				Next: &model.ListNode{
 					Val:  1,
 					Next: nil,
 				},
@@ -22,9 +20,9 @@ func TestPalindromeLinkList(t *testing.T) {
 		},
 	}
 
-	head2 := &ListNode{
+	head2 := &model.ListNode{
 		Val: 1,
-		Next: &ListNode{
+		Next: &model.ListNode{
 			Val:  2,
 			Next: nil,
 		},
@@ -36,7 +34,7 @@ func TestPalindromeLinkList(t *testing.T) {
 
 }
 
-func isPalindrome1(head *ListNode) bool {
+func isPalindrome1(head *model.ListNode) bool {
 	vals := []int{}
 	for head != nil {
 		vals = append(vals, head.Val)
