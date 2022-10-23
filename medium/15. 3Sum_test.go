@@ -21,9 +21,10 @@ func TestThreeSum(t *testing.T) {
 		{input: []int{0, 0, 0}, output: [][]int{{0, 0, 0}}},
 		{input: []int{3, 0, -2, -1, 1, 2}, output: [][]int{{-2, -1, 3}, {-2, 0, 2}, {-1, 0, 1}}},
 	} {
-		if !reflect.DeepEqual(test.output, threeSum(test.input)) &&
-			len(test.output) > 0 && len(threeSum(test.input)) > 0 {
-			t.Errorf("expect %v but got %v", test.output, threeSum(test.input))
+		sum := threeSum(test.input)
+		if !reflect.DeepEqual(test.output, sum) &&
+			len(test.output) > 0 && len(sum) > 0 {
+			t.Errorf("expect %v but got %v", test.output, sum)
 		}
 	}
 }
@@ -46,9 +47,7 @@ func threeSum(nums []int) [][]int {
 			continue
 		}
 
-		mid, right := left+1, n-1
-
-		for mid < right {
+		for mid, right := left+1, n-1; mid < right; {
 			if mid > left+1 && nums[mid] == nums[mid-1] {
 				mid++
 				continue
