@@ -32,7 +32,7 @@ func TestThreeSum(t *testing.T) {
 // Runtime: 51 ms, faster than 64.27% of Go online submissions for 3Sum.
 // Memory Usage: 7.5 MB, less than 67.92% of Go online submissions for 3Sum.
 // Time: O(left* (mid + right)) ~ O(n^3)
-// Space: O(1)
+// Space: O(a) a is len(ans)
 
 func threeSum(nums []int) [][]int {
 	ans := [][]int{}
@@ -79,7 +79,7 @@ func threeSum(nums []int) [][]int {
 	return ans
 }
 
-/* Unfortunally, my solution Time Limit Exceeded due to O(n*(a + b)) ~ O(n^2), n is mid, a and b is left and right
+/*
 func threeSum(nums []int) [][]int {
 	leng := len(nums)
 	if leng <= 2 {
