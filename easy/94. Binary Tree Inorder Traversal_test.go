@@ -43,14 +43,17 @@ func TestInorderTraversal(t *testing.T) {
 	}
 }
 
-// func inorderTraversal(root *TreeNode) []int {
-// 	res := []int{}
+func inorderTraversal(root *TreeNode) []int {
+	res := []int{}
 
-// 	inorderRecursive(&res, root)
+	inorderRecursive(&res, root)
+	// inorderStack(&res, root)
 
-// 	return res
-// }
+	return res
+}
 
+// Time complexity: O(n), 2 ms
+// Space complexity: O(n), 1.9 MB
 func inorderRecursive(res *[]int, cur *TreeNode) {
 	if cur == nil {
 		return
@@ -59,13 +62,6 @@ func inorderRecursive(res *[]int, cur *TreeNode) {
 	inorderRecursive(res, cur.Left)
 	*res = append(*res, cur.Val) // the append will change the len, cap -> so must use pointer
 	inorderRecursive(res, cur.Right)
-}
-func inorderTraversal(root *TreeNode) []int {
-	res := []int{}
-
-	inorderStack(&res, root)
-
-	return res
 }
 
 func inorderStack(res *[]int, root *TreeNode) {
