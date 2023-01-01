@@ -123,7 +123,7 @@ func isMirrorTreeBFS(root *TreeNode) bool {
 		{root.Left, root.Right},
 	}
 
-	for q.isEmpty() {
+	for !q.isEmpty() {
 		left, right := q.pop()
 
 		if left == nil && right == nil {
