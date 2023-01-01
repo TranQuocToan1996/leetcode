@@ -75,6 +75,8 @@ func isSymmetric(root *TreeNode) bool {
 // uti.LogRuntime = 12917 nsec
 // Letcode runtime na ms
 // Leetcode memory 2.9 MB (beat 70%)
+// Time complexity :O(n). Because we traverse the entire input tree once, the total run time is O(n), where n is the total number of nodes in the tree.
+// Space complexity :O(n) The number of recursive calls is bound by the height of the tree. In the worst case, the tree is linear and the height is in O(n). Therefore, space complexity due to recursive calls on the stack is O(n) in the worst case.
 func isMirrorTreeRecursive(tree1, tree2 *TreeNode) bool {
 	if tree1 == nil && tree2 == nil {
 		return true
@@ -105,9 +107,15 @@ func (q *treeQueue) pop() (left, right *TreeNode) {
 	return left, right
 }
 
+func (q treeQueue) isEmpty() bool {
+	return len(q) == 0
+}
+
 // uti.LogRuntime = 12333 nsec
 // Letcode runtime na ms
 // Leetcode memory 2.9 MB (beat 70%)
+// Time complexity :O(n). Because we traverse the entire input tree once, the total run time is O(n), where n is the total number of nodes in the tree.
+// Space complexity :O(n) There is additional space required for the search queue. In the worst case, we have to insert O(n) nodes in the queue. Therefore, space complexity is O(n).
 
 func isMirrorTreeBFS(root *TreeNode) bool {
 	if root == nil {
@@ -118,7 +126,7 @@ func isMirrorTreeBFS(root *TreeNode) bool {
 		{root.Left, root.Right},
 	}
 
-	for len(q) > 0 {
+	for q.isEmpty() {
 		left, right := q.pop()
 
 		if left == nil && right == nil {
