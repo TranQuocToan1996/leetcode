@@ -64,12 +64,9 @@ func TestSymetric(t *testing.T) {
 }
 
 func isSymmetric(root *TreeNode) bool {
-	if root == nil {
-		return true
-	}
 
-	// return isMirrorTreeRecursive(root.Left, root.Right)
-	return isMirrorTreeBFS(root)
+	// return root == nil || isMirrorTreeRecursive(root.Left, root.Right)
+	return root == nil || isMirrorTreeBFS(root)
 }
 
 // uti.LogRuntime = 12917 nsec
