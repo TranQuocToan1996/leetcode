@@ -1,11 +1,5 @@
 package easy
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
 // Left less than right
 
 // https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
