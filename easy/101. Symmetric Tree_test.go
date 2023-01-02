@@ -94,7 +94,7 @@ type treeQueue [][maxChildsPerNode]*TreeNode
 
 // pop change the len, cap so that must use pointer receiver
 func (q *treeQueue) pop() (left, right *TreeNode) {
-	if len(*q) == 0 {
+	if q.isEmpty() {
 		return nil, nil
 	}
 
@@ -124,7 +124,7 @@ func isMirrorTreeBFS(root *TreeNode) bool {
 	}
 
 	for !q.isEmpty() {
-		left, right := q.pop()
+		left, right := q.pop() 
 
 		if left == nil && right == nil {
 			continue
