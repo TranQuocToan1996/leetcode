@@ -51,7 +51,7 @@ func unorderMatch(arr1, arr2 []string) bool {
 	return true
 }
 
-// The n is small so both cases doesn't product big difference
+// The n is small so both cases doesn't produce big difference
 func letterCombinations(digits string) []string {
 
 	// uti.LogRuntime ~ 7000 nsec, the iterator faster a bit in the first digit because we assign an array directly
