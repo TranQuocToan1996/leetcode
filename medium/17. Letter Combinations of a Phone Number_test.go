@@ -18,13 +18,13 @@ func TestLetterCombinations(t *testing.T) {
 		{input: "2", output: []string{"a", "b", "c"}},
 	} {
 		result := letterCombinations(test.input)
-		if !crossSectionExist(result, test.output) {
+		if !unorderMatch(result, test.output) {
 			t.Errorf("Actually %v Expect %v", result, test.output)
 		}
 	}
 }
 
-func crossSectionExist(arr1, arr2 []string) bool {
+func unorderMatch(arr1, arr2 []string) bool {
 	if len(arr1) != len(arr2) {
 		return false
 	}
@@ -110,16 +110,16 @@ func letterCombinationRecusive(digits string) []string {
 	return result
 }
 
-func generateCombination(current string, digits string, ans *[]string) {
+func generateCombination(current string, digits string, result *[]string) {
 	if len(digits) == 0 {
 		if current != "" {
-			*ans = append(*ans, current)
+			*result = append(*result, current)
 		}
 		return
 	}
 
 	currentDigit := digits[0]
 	for _, char := range dictionary[currentDigit] {
-		generateCombination(current+char, digits[1:], ans)
+		generateCombination(current+char, digits[1:], result)
 	}
 }
