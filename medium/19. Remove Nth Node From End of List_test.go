@@ -68,12 +68,12 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	// uti.LogRuntime base on concurrency, so that best and worst big difference.
 	// Runtime: O(n) 2ms (53.83%): Need to traveral all singly linked list once, faster than normal because the channel send signal complete before all callstack done
 	// Space: O(1) 2.2 MB (30.28%): only allocate for right, left, isEnd, channel. Callstack O(height(head))
-	return removeNthFromEnd_recursiveWithChannel(head, n)
+	// return removeNthFromEnd_recursiveWithChannel(head, n)
 
 	// uti.LogRuntime 35958 nsec
 	// Runtime: O(n) 2ms (53.83%): Need to traveral all singly linked list once
-	// Space: O(1) 2.2 MB (30.28%): only allocate for right, left, isEnd
-	// return removeNthFromEnd_twoPointersSameRate(head, n)
+	// Space: O(1) 2.2 MB (30.28%): only allocate for right, left
+	return removeNthFromEnd_twoPointersSameRate(head, n)
 
 	// uti.LogRuntime 37292 nsec
 	// Runtime: O(n) 2ms (53.83%): Need to traveral all singly linked list once
@@ -88,24 +88,18 @@ func removeNthFromEnd_twoPointersSameRate(head *ListNode, n int) *ListNode {
 	}
 	left, right := head, head
 
-	var isEnd = false
 	for i := 0; i < n; i++ {
 		if right.Next == nil {
-			isEnd = true
-			break
+			return head.Next
 		}
 		right = right.Next
 	}
 
-	if isEnd {
-		return head.Next
-	} else {
-		for right.Next != nil {
-			right = right.Next
-			left = left.Next
-		}
-		left.Next = left.Next.Next
+	for right.Next != nil {
+		right = right.Next
+		left = left.Next
 	}
+	left.Next = left.Next.Next
 
 	return head
 }
