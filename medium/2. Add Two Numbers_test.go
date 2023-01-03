@@ -7,11 +7,6 @@ Time complexity: O(n), 	21 ms
 Space complexity: O(n), 4.6 MB
 */
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	carryNum := 0
 	l3 := new(ListNode)

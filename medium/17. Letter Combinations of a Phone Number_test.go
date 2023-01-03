@@ -65,7 +65,7 @@ func letterCombinations(digits string) []string {
 	// Leetcode runtime 1 ms (61.52%)
 	// Memory: 1.9 MB (88.94%)
 	// Time complexity: for the result is (4^n*n) where 4 is case 7 or 9 that repeats 4 times
-	// Space complexity: Worst for callstack is O(n), for the result is (4^n) where 4 is case 7 or 9
+	// Space complexity: Worst for callstack is O(len(digits)), for the result is (4^n) where 4 is case 7 or 9
 	return letterCombinationRecursive(digits)
 }
 
