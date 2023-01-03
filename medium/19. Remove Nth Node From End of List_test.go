@@ -1,7 +1,6 @@
 package medium
 
 import (
-	"fmt"
 	"leetcode/uti"
 	"testing"
 	"time"
@@ -123,7 +122,6 @@ func traversalWithChannel(node *ListNode, n int, res chan struct{}) int {
 		node.Next = node.Next.Next
 		close(res)
 	}
-	fmt.Println(place)
 	return place + 1
 }
 
