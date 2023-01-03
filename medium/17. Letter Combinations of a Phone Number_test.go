@@ -56,17 +56,17 @@ func letterCombinations(digits string) []string {
 
 	// uti.LogRuntime ~ 7000 nsec, the iterator faster a bit in the first digit because we assign an array directly
 	// Leetcode runtime 1 ms (61.52%)
-	// Memery: 1.9 MB (88.94%)
+	// Memory: 1.9 MB (88.94%)
 	// Time complexity: for the result is (4^n*n) where 4 is case 7 or 9 that repeats 4 times
 	// Space complexity: for the result is (4^n) where 4 is case 7 or 9
-	return letterCombinationIteration(digits)
+	// return letterCombinationIteration(digits)
 
 	// uti.LogRuntime ~ 8000 nsec
 	// Leetcode runtime 1 ms (61.52%)
-	// Memery: 1.9 MB (88.94%)
+	// Memory: 1.9 MB (88.94%)
 	// Time complexity: for the result is (4^n*n) where 4 is case 7 or 9 that repeats 4 times
 	// Space complexity: Worst for callstack is O(n), for the result is (4^n) where 4 is case 7 or 9
-	// return letterCombinationRecusive(digits)
+	return letterCombinationRecursive(digits)
 }
 
 var (
@@ -102,7 +102,7 @@ func letterCombinationIteration(digits string) []string {
 	return result
 }
 
-func letterCombinationRecusive(digits string) []string {
+func letterCombinationRecursive(digits string) []string {
 
 	result := []string{}
 	generateCombination("", digits, &result)
