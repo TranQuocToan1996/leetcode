@@ -11,6 +11,7 @@ import (
 // https://leetcode.com/problems/binary-tree-inorder-traversal/
 // https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
 func TestInorderTraversal(t *testing.T) {
+	defer uti.MemoryAlloc()
 	defer uti.LogRuntime(time.Now())
 	tests := []struct {
 		tree   *TreeNode
