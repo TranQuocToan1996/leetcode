@@ -11,20 +11,20 @@ type inPair struct {
 	second *int
 }
 
-// Time: O()
-// Space: O()
+// Time: O(n)
+// Space: O(n)
 func restoreArray(adjacentPairs [][]int) []int {
 	var (
-		m      = make(map[int]inPair, len(adjacentPairs)+1)
+		inPair = make(map[int]inPair, len(adjacentPairs)+1)
 		result = make([]int, len(adjacentPairs)+1)
 	)
 
 	for _, pair := range adjacentPairs {
-		markAdjacent(m, pair[0], pair[1])
-		markAdjacent(m, pair[1], pair[0])
+		markAdjacent(inPair, pair[0], pair[1])
+		markAdjacent(inPair, pair[1], pair[0])
 	}
 
-	for key, pair := range m {
+	for key, pair := range inPair {
 		if pair.second == nil {
 			result[0] = key
 			break
@@ -33,7 +33,7 @@ func restoreArray(adjacentPairs [][]int) []int {
 
 	for i := 1; i < len(result); i++ {
 		cur := result[i-1]
-		pair := m[cur]
+		pair := inPair[cur]
 		if pair.second == nil {
 			result[i] = *pair.first
 			continue
