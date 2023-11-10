@@ -17,7 +17,7 @@ func spiralOrder(matrix [][]int) []int {
 	)
 
 	done := func() bool {
-		return !(left <= right && top <= bot)
+		return left > right || top > bot
 	}
 
 	for {
