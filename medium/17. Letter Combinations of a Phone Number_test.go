@@ -1,9 +1,10 @@
 package medium
 
 import (
-	"leetcode/uti"
 	"testing"
 	"time"
+
+	"leetcode/uti"
 )
 
 // https://leetcode.com/problems/letter-combinations-of-a-phone-number/
@@ -18,42 +19,14 @@ func TestLetterCombinations(t *testing.T) {
 		{input: "2", output: []string{"a", "b", "c"}},
 	} {
 		result := letterCombinations(test.input)
-		if !unorderMatch(result, test.output) {
+		if !uti.UnorderMatch(result, test.output) {
 			t.Errorf("Actually %v Expect %v", result, test.output)
 		}
 	}
 }
 
-func unorderMatch(arr1, arr2 []string) bool {
-	if len(arr1) != len(arr2) {
-		return false
-	}
-
-	m1, m2 := map[string]bool{}, map[string]bool{}
-	for _, c := range arr1 {
-		m1[c] = true
-	}
-	for _, c := range arr2 {
-		m2[c] = true
-	}
-	for _, c := range arr1 {
-		_, ok := m2[c]
-		if !ok {
-			return false
-		}
-	}
-	for _, c := range arr2 {
-		_, ok := m1[c]
-		if !ok {
-			return false
-		}
-	}
-	return true
-}
-
 // The n is small so both cases doesn't produce big difference
 func letterCombinations(digits string) []string {
-
 	// uti.LogRuntime ~ 7000 nsec, the iterator faster a bit in the first digit because we assign an array directly
 	// Leetcode runtime 1 ms (61.52%)
 	// Memory: 1.9 MB (88.94%)
@@ -69,18 +42,16 @@ func letterCombinations(digits string) []string {
 	return letterCombinationRecursive(digits)
 }
 
-var (
-	dictionary = map[byte][]string{
-		'2': []string{"a", "b", "c"},
-		'3': []string{"d", "e", "f"},
-		'4': []string{"g", "h", "i"},
-		'5': []string{"j", "k", "l"},
-		'6': []string{"m", "n", "o"},
-		'7': []string{"p", "q", "r", "s"},
-		'8': []string{"t", "u", "v"},
-		'9': []string{"w", "x", "y", "z"},
-	}
-)
+var dictionary = map[byte][]string{
+	'2': {"a", "b", "c"},
+	'3': {"d", "e", "f"},
+	'4': {"g", "h", "i"},
+	'5': {"j", "k", "l"},
+	'6': {"m", "n", "o"},
+	'7': {"p", "q", "r", "s"},
+	'8': {"t", "u", "v"},
+	'9': {"w", "x", "y", "z"},
+}
 
 func letterCombinationIteration(digits string) []string {
 	result := []string{}
@@ -103,7 +74,6 @@ func letterCombinationIteration(digits string) []string {
 }
 
 func letterCombinationRecursive(digits string) []string {
-
 	result := []string{}
 	generateCombination("", digits, &result)
 
