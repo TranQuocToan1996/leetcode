@@ -22,8 +22,9 @@ func merge(intervals [][]int) [][]int {
 	res := make([][]int, 0, len(intervals))
 	res = append(res, intervals[0])
 	for i := 1; i < len(intervals); i++ {
-		if isOverLap(res[len(res)-1], intervals[i]) {
-			mergeInterval(res[len(res)-1], intervals[i])
+		left := res[len(res)-1]
+		if isOverLap(left, intervals[i]) {
+			mergeInterval(left, intervals[i])
 			continue
 		}
 		res = append(res, intervals[i])
