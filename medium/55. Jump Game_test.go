@@ -4,6 +4,8 @@ import (
 	"testing"
 )
 
+// Time: O(n)
+// Space: O(1)
 func canJump(nums []int) bool {
 	max := nums[0]
 	for i := 1; i < len(nums); i++ {
