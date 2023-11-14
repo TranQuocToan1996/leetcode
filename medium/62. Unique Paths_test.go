@@ -5,14 +5,29 @@ import (
 	"testing"
 )
 
+// Time: O(m*n)
+// Space: O(m*n)
 func uniquePaths(m int, n int) int {
-	if m == 1 && n == 1 {
-		return 0
+	cache := make([][]int, m)
+	for i := 0; i < len(cache); i++ {
+		cache[i] = make([]int, n)
 	}
 
-	//
+	for i := 0; i < n; i++ {
+		cache[m-1][i] = 1
+	}
 
-	return 0
+	for i := 0; i < m; i++ {
+		cache[i][n-1] = 1
+	}
+
+	for i := m - 2; i >= 0; i-- {
+		for j := n - 2; j >= 0; j-- {
+			cache[i][j] = cache[i+1][j] + cache[i][j+1]
+		}
+	}
+
+	return cache[0][0]
 }
 
 func TestUniquePaths(t *testing.T) {
