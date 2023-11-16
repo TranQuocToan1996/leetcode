@@ -1,97 +1,51 @@
 package medium
 
 import (
+	"reflect"
 	"testing"
-
-	"leetcode/uti"
 )
 
-// Time: O(log(m) * log(n))
-// Space: O(1)
-func searchMatrix(matrix [][]int, target int) bool {
-	m, n := len(matrix), len(matrix[0])
-	if target > matrix[m-1][n-1] {
-		return false
+// You must solve this problem without using the library's sort function.
+// nums[i] only 0,1,2
+// Time: O(n)
+// Space: O(1), due to limit key of the map
+func sortColors(nums []int) {
+	n := len(nums)
+	count := make(map[int]int)
+	for _, num := range nums {
+		count[num]++
 	}
-	row := 0
-	top, bot := 0, m-1
-	for top <= bot {
-		mid := (bot + top) / 2
-		maxRowVal := matrix[mid][n-1]
-		minRowVal := matrix[mid][0]
-		if maxRowVal >= target && minRowVal <= target {
-			row = mid
-			break
+	numWrite := 0
+	for i := 0; i < n && len(count) > 0; i++ {
+		for count[numWrite] <= 0 {
+			numWrite++
 		}
-		if maxRowVal < target {
-			top = mid + 1
-		} else {
-			bot = mid - 1
-		}
+		nums[i] = numWrite
+		count[numWrite]--
 	}
-
-	return uti.BinarySearch(matrix[row], target)
 }
 
-// Time: O(log(n*m))
-// Space: O(1)
-// func searchMatrix(matrix [][]int, target int) bool {
-//     m := len(matrix)
-//     n := len(matrix[0])
-//     left, right := 0, m*n-1
-
-//     for left <= right {
-//         mid := left + (right-left)/2
-//         mid_val := matrix[mid/n][mid%n]
-
-//         if mid_val == target {
-//             return true
-//         } else if mid_val < target {
-//             left = mid + 1
-//         } else {
-//             right = mid - 1
-//         }
-//     }
-//     return false
-// }
-
-func TestSearchMatrix(t *testing.T) {
+func TestSortColors(t *testing.T) {
 	for _, test := range []struct {
-		matrix [][]int
-		target int
-		expect bool
+		input  []int
+		expect []int
 	}{
 		{
-			matrix: [][]int{
-				{1, 3, 5, 7},
-				{10, 11, 16, 20},
-				{23, 30, 34, 60},
-			},
-			target: 3,
-			expect: true,
+			input:  []int{2, 0, 2, 1, 1, 0},
+			expect: []int{0, 0, 1, 1, 2, 2},
 		},
 		{
-			matrix: [][]int{
-				{1, 3, 5, 7},
-				{10, 11, 16, 20},
-				{23, 30, 34, 60},
-			},
-			target: 13,
-			expect: false,
+			input:  []int{2, 0, 1},
+			expect: []int{0, 1, 2},
 		},
 		{
-			matrix: [][]int{
-				{1, 3, 5, 7},
-				{10, 11, 16, 20},
-				{23, 30, 34, 60},
-			},
-			target: 34,
-			expect: true,
+			input:  []int{0},
+			expect: []int{0},
 		},
 	} {
-		res := searchMatrix(test.matrix, test.target)
-		if res != test.expect {
-			t.Errorf("expect %v but got %v", test.expect, test.matrix)
+		sortColors(test.input)
+		if !reflect.DeepEqual(test.input, test.expect) {
+			t.Errorf("expect %v but got %v", test.expect, test.input)
 		}
 	}
 }
