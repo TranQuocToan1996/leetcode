@@ -3,6 +3,8 @@ package medium
 import (
 	"strings"
 	"testing"
+
+	"leetcode/uti"
 )
 
 // https://leetcode.com/problems/longest-palindromic-substring/
@@ -35,16 +37,6 @@ func TestLongestPalindrome(t *testing.T) {
 	}
 }
 
-func isPalindrome(s string) bool {
-	for i := 0; i < len(s)/2; i++ {
-		if s[i] != s[len(s)-1-i] {
-			return false
-		}
-	}
-
-	return true
-}
-
 // Runtime: 82 ms, faster than 35.23% of Go online submissions for Longest Palindromic Substring.
 // Memory Usage: 2.5 MB, less than 66.57% of Go online submissions for Longest Palindromic Substring.
 
@@ -61,7 +53,7 @@ func longestPalindrome(s string) string {
 	for max > 1 {
 		for i := 0; i+max-1 < len(s); i++ {
 			sub := s[i : i+max]
-			if isPalindrome(sub) {
+			if uti.IsPalindrome(sub) {
 				return sub
 			}
 		}
