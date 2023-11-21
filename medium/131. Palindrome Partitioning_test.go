@@ -7,6 +7,8 @@ import (
 	"leetcode/uti"
 )
 
+// Time: O(2^n * n)
+// Space: O(n)
 func partition(s string) [][]string {
 	n := len(s)
 	var res [][]string
