@@ -53,5 +53,3 @@ func TestMinDistance(t *testing.T) {
 		}
 	}
 }
-
-
