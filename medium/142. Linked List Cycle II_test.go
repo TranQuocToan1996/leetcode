@@ -2,8 +2,29 @@ package medium
 
 import "testing"
 
+// Time  Complexity: O(N)
+// Space Complexity: O(1)
 func detectCycle(head *ListNode) *ListNode {
-	return nil
+	slow, fast := head, head
+	isCycle := false
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+		if slow == fast {
+			isCycle = true
+			break
+		}
+	}
+	if !isCycle {
+		return nil
+	}
+
+	for slow != head {
+		head = head.Next
+		slow = slow.Next
+	}
+
+	return head
 }
 
 func TestDetectCycle(t *testing.T) {
@@ -54,7 +75,7 @@ func TestDetectCycle(t *testing.T) {
 		output := test.setupAndGetOutput(test.start)
 		res := detectCycle(test.start)
 		if res != output {
-			t.Errorf("expect %v but got %v", output, res)
+			t.Errorf("expect %v but got %v, testInput %v ", output, res, test.start)
 		}
 	}
 }
