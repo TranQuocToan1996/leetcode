@@ -5,3 +5,11 @@ func DeepCopySlice[T any](orig []T) []T {
 	copy(cpy, orig)
 	return cpy
 }
+
+func ReverseSlice[T any](nums []T, start int, end int) {
+	for start < end {
+		nums[start], nums[end] = nums[end], nums[start]
+		start++
+		end--
+	}
+}
