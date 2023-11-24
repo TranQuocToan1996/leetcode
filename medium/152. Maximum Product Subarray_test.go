@@ -32,7 +32,7 @@ func TestMaxProduct(t *testing.T) {
 	} {
 		res := maxProduct(test.nums)
 		if res != test.output {
-			t.Errorf("expect %v but got %v", test.output, res)
+			t.Errorf("expect %v but got %v, test %v", test.output, res, test)
 		}
 	}
 }

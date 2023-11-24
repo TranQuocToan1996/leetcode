@@ -13,3 +13,10 @@ func ReverseSlice[T any](nums []T, start int, end int) {
 		end--
 	}
 }
+
+func RemoveElementSlice[T any](slice []T, s int) []T {
+	if len(slice) > 0 {
+		return append(slice[:s], slice[s+1:]...)
+	}
+	return slice
+}
