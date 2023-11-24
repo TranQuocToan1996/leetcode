@@ -7,6 +7,8 @@ import (
 	"leetcode/model"
 )
 
+// Time: O(n)
+// Space: O(log(n))
 func rightSideView(root *model.TreeNode) []int {
 	if root == nil {
 		return nil
