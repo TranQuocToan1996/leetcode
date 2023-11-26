@@ -1,10 +1,12 @@
 package easy
 
+import "leetcode/model"
+
 // Left less than right
 
 // https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
 
-func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+func lowestCommonAncestor(root, p, q *model.TreeNode) *model.TreeNode {
 	cur := root
 	v1, v2 := p.Val, q.Val
 	for {

@@ -1,9 +1,11 @@
 package easy
 
 import (
-	"leetcode/uti"
 	"testing"
 	"time"
+
+	"leetcode/model"
+	"leetcode/uti"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -14,15 +16,15 @@ func TestInorderTraversal(t *testing.T) {
 	defer uti.MemoryAlloc()
 	defer uti.LogRuntime(time.Now())
 	tests := []struct {
-		tree   *TreeNode
+		tree   *model.TreeNode
 		expect []int
 	}{
 		{
-			&TreeNode{
+			&model.TreeNode{
 				Val: 1,
-				Right: &TreeNode{
+				Right: &model.TreeNode{
 					Val: 2,
-					Left: &TreeNode{
+					Left: &model.TreeNode{
 						Val: 3,
 					},
 				},
@@ -34,7 +36,7 @@ func TestInorderTraversal(t *testing.T) {
 			[]int{},
 		},
 		{
-			&TreeNode{Val: 1},
+			&model.TreeNode{Val: 1},
 			[]int{1},
 		},
 	}
@@ -44,7 +46,7 @@ func TestInorderTraversal(t *testing.T) {
 	}
 }
 
-func inorderTraversal(root *TreeNode) []int {
+func inorderTraversal(root *model.TreeNode) []int {
 	res := []int{}
 
 	inorderRecursive(&res, root)
@@ -55,7 +57,7 @@ func inorderTraversal(root *TreeNode) []int {
 
 // Time complexity: O(n), 2 ms
 // Space complexity: O(n), 1.9 MB
-func inorderRecursive(res *[]int, cur *TreeNode) {
+func inorderRecursive(res *[]int, cur *model.TreeNode) {
 	if cur == nil {
 		return
 	}
@@ -65,8 +67,8 @@ func inorderRecursive(res *[]int, cur *TreeNode) {
 	inorderRecursive(res, cur.Right)
 }
 
-func inorderStack(res *[]int, root *TreeNode) {
-	stack := []*TreeNode{}
+func inorderStack(res *[]int, root *model.TreeNode) {
+	stack := []*model.TreeNode{}
 	cur := root
 
 	for cur != nil || len(stack) > 0 {
@@ -87,7 +89,7 @@ func inorderStack(res *[]int, root *TreeNode) {
 	}
 }
 
-func pop(s *[]*TreeNode) (*TreeNode, bool) {
+func pop(s *[]*model.TreeNode) (*model.TreeNode, bool) {
 	if len(*s) == 0 {
 		return nil, false
 	} else {

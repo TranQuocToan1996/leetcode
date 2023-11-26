@@ -5,6 +5,8 @@ import (
 	"reflect"
 	"testing"
 	"time"
+
+	"leetcode/model"
 )
 
 /**
@@ -18,26 +20,26 @@ import (
 
 func TestAverageLevelBinaryTree(t *testing.T) {
 	tests := []struct {
-		tree   *TreeNode
+		tree   *model.TreeNode
 		expect []float64
 	}{
 		{
-			&TreeNode{
+			&model.TreeNode{
 				Val: 1,
-				Left: &TreeNode{
+				Left: &model.TreeNode{
 					Val: 2,
-					Left: &TreeNode{
+					Left: &model.TreeNode{
 						Val: 3,
 					},
 				},
-				Right: &TreeNode{
+				Right: &model.TreeNode{
 					Val: 3,
 				},
 			},
 			[]float64{1.00000, 2.5000, 3.0},
 		},
 		{
-			&TreeNode{Val: 1, Left: &TreeNode{Val: 2}},
+			&model.TreeNode{Val: 1, Left: &model.TreeNode{Val: 2}},
 			[]float64{1.00000, 2.0000},
 		},
 	}
@@ -69,7 +71,7 @@ type totalHeight struct {
 	numberByHeight map[int]int
 }
 
-func averageOfLevels(root *TreeNode) []float64 {
+func averageOfLevels(root *model.TreeNode) []float64 {
 	if root == nil {
 		return []float64{0}
 	}
@@ -96,10 +98,9 @@ func averageOfLevels(root *TreeNode) []float64 {
 	}
 
 	return res
-
 }
 
-func sumByHeight(node *TreeNode, total totalHeight, height int) {
+func sumByHeight(node *model.TreeNode, total totalHeight, height int) {
 	if node == nil {
 		return
 	}
@@ -121,11 +122,11 @@ func sumByHeight(node *TreeNode, total totalHeight, height int) {
 // Time complexity : O(n). The whole tree is traversed atmost once. Here, n refers to the number of nodes in the given binary tree.
 
 // Space complexity : O(m). The size of queue or temp can grow upto atmost the maximum number of nodes at any level in the given binary tree. Here, m refers to the maximum mumber of nodes at any level in the input tree.
-func averageOfLevelsBFS(root *TreeNode) []float64 {
+func averageOfLevelsBFS(root *model.TreeNode) []float64 {
 	if root == nil {
 		return []float64{}
 	}
-	queue := []*TreeNode{root}
+	queue := []*model.TreeNode{root}
 	ans := []float64{}
 	for len(queue) != 0 {
 		n, sum := len(queue), 0

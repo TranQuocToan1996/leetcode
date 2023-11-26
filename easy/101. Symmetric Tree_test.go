@@ -1,9 +1,11 @@
 package easy
 
 import (
-	"leetcode/uti"
 	"testing"
 	"time"
+
+	"leetcode/model"
+	"leetcode/uti"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -11,27 +13,27 @@ import (
 func TestSymetric(t *testing.T) {
 	defer uti.LogRuntime(time.Now())
 	tests := []struct {
-		tree   *TreeNode
+		tree   *model.TreeNode
 		expect bool
 	}{
 		{
-			&TreeNode{
+			&model.TreeNode{
 				Val: 1,
-				Right: &TreeNode{
+				Right: &model.TreeNode{
 					Val: 2,
-					Left: &TreeNode{
+					Left: &model.TreeNode{
 						Val: 4,
 					},
-					Right: &TreeNode{
+					Right: &model.TreeNode{
 						Val: 3,
 					},
 				},
-				Left: &TreeNode{
+				Left: &model.TreeNode{
 					Val: 2,
-					Left: &TreeNode{
+					Left: &model.TreeNode{
 						Val: 3,
 					},
-					Right: &TreeNode{
+					Right: &model.TreeNode{
 						Val: 4,
 					},
 				},
@@ -39,17 +41,17 @@ func TestSymetric(t *testing.T) {
 			true,
 		},
 		{
-			&TreeNode{
+			&model.TreeNode{
 				Val: 1,
-				Right: &TreeNode{
+				Right: &model.TreeNode{
 					Val: 2,
-					Right: &TreeNode{
+					Right: &model.TreeNode{
 						Val: 3,
 					},
 				},
-				Left: &TreeNode{
+				Left: &model.TreeNode{
 					Val: 2,
-					Right: &TreeNode{
+					Right: &model.TreeNode{
 						Val: 3,
 					},
 				},
@@ -63,8 +65,7 @@ func TestSymetric(t *testing.T) {
 	}
 }
 
-func isSymmetric(root *TreeNode) bool {
-
+func isSymmetric(root *model.TreeNode) bool {
 	// return root == nil || isMirrorTreeRecursive(root.Left, root.Right)
 	return root == nil || isMirrorTreeBFS(root)
 }
@@ -74,7 +75,7 @@ func isSymmetric(root *TreeNode) bool {
 // Leetcode memory 2.9 MB (beat 70%)
 // Time complexity :O(n). Because we traverse the entire input tree once, the total run time is O(n), where n is the total number of nodes in the tree.
 // Space complexity :O(n) The number of recursive calls is bound by the height of the tree. In the worst case, the tree is linear and the height is in O(n). Therefore, space complexity due to recursive calls on the stack is O(n) in the worst case.
-func isMirrorTreeRecursive(tree1, tree2 *TreeNode) bool {
+func isMirrorTreeRecursive(tree1, tree2 *model.TreeNode) bool {
 	if tree1 == nil && tree2 == nil {
 		return true
 	}
@@ -90,10 +91,10 @@ const (
 	maxChildsPerNode = 2
 )
 
-type treeQueue [][maxChildsPerNode]*TreeNode
+type treeQueue [][maxChildsPerNode]*model.TreeNode
 
 // pop change the len, cap so that must use pointer receiver
-func (q *treeQueue) pop() (left, right *TreeNode) {
+func (q *treeQueue) pop() (left, right *model.TreeNode) {
 	if q.isEmpty() {
 		return nil, nil
 	}
@@ -114,7 +115,7 @@ func (q treeQueue) isEmpty() bool {
 // Time complexity :O(n). Because we traverse the entire input tree once, the total run time is O(n), where n is the total number of nodes in the tree.
 // Space complexity :O(n) There is additional space required for the search queue. In the worst case, we have to insert O(n) nodes in the queue. Therefore, space complexity is O(n).
 
-func isMirrorTreeBFS(root *TreeNode) bool {
+func isMirrorTreeBFS(root *model.TreeNode) bool {
 	if root == nil {
 		return true
 	}
@@ -124,7 +125,7 @@ func isMirrorTreeBFS(root *TreeNode) bool {
 	}
 
 	for !q.isEmpty() {
-		left, right := q.pop() 
+		left, right := q.pop()
 
 		if left == nil && right == nil {
 			continue
