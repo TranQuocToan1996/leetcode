@@ -8,17 +8,36 @@ import (
 )
 
 func sortedArrayToBST(nums []int) *model.TreeNode {
-	return nil
+	if len(nums) == 0 {
+		return nil
+	}
+	mid := len(nums) / 2
+	root := &model.TreeNode{Val: nums[mid]}
+	root.Left = sortedArrayToBST(nums[:mid])
+	root.Right = sortedArrayToBST(nums[mid+1:])
+	return root
 }
 
 func TestSortedArrayToBST(t *testing.T) {
 	for _, test := range []struct {
 		nums   []int
-		output int
+		output *model.TreeNode
 	}{
-		{nums: []int{2, 3, -2, 4}, output: 6},
-		{nums: []int{-2, 0, -1}, output: 0},
-		{nums: []int{2, -2, -3}, output: 12},
+		{nums: []int{-10, -3, 0, 5, 9}, output: &model.TreeNode{
+			Val: 0,
+			Left: &model.TreeNode{
+				Val: -3,
+				Left: &model.TreeNode{
+					Val: -10,
+				},
+			},
+			Right: &model.TreeNode{
+				Val: 9,
+				Left: &model.TreeNode{
+					Val: 5,
+				},
+			},
+		}},
 	} {
 		res := sortedArrayToBST(test.nums)
 		if !reflect.DeepEqual(res, test.output) {
