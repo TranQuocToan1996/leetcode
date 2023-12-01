@@ -19,3 +19,9 @@ func (h *IntMinHeap) Pop() interface{} {
 	*h = old[0 : n-1]
 	return x
 }
+
+type IntMaxHeap struct {
+	IntMinHeap
+}
+
+func (h IntMaxHeap) Less(i, j int) bool { return h.IntMinHeap[i] > h.IntMinHeap[j] }

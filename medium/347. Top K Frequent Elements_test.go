@@ -8,7 +8,7 @@ import (
 )
 
 type topKFrequentHeapData struct {
-	val, freqency int
+	val, frequency int
 }
 type topKFrequentHeap []topKFrequentHeapData
 
@@ -17,7 +17,7 @@ func (h topKFrequentHeap) Len() int {
 }
 
 func (h topKFrequentHeap) Less(i int, j int) bool {
-	return h[i].freqency < h[j].freqency
+	return h[i].frequency < h[j].frequency
 }
 
 func (h topKFrequentHeap) Swap(i int, j int) {
@@ -52,8 +52,8 @@ func topKFrequent(nums []int, k int) []int {
 	heap.Init(&topKFrequentHeap)
 	for num, freq := range seen {
 		heap.Push(&topKFrequentHeap, topKFrequentHeapData{
-			val:      num,
-			freqency: freq,
+			val:       num,
+			frequency: freq,
 		})
 		for topKFrequentHeap.Len() > k {
 			heap.Pop(&topKFrequentHeap)
@@ -78,7 +78,7 @@ nextTest:
 		{nums: []int{1, 1, 2, 2, 3, 3}, k: 2, anyOutput: [][]int{{1, 2}, {1, 3}, {2, 3}}},
 		{nums: []int{1}, k: 1, anyOutput: [][]int{{1}}},
 		{nums: []int{1, 1, 1, 2, 2, 3}, k: 1, anyOutput: [][]int{{1}}},
-		{nums: []int{3, 0, 1, 0}, k: 1, anyOutput: [][]int{{3}, {1}, {0}}},
+		{nums: []int{3, 0, 1, 0}, k: 1, anyOutput: [][]int{{0}}},
 	} {
 		res := topKFrequent(test.nums, test.k)
 		for _, expect := range test.anyOutput {
