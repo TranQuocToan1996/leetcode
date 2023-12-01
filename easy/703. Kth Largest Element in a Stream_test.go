@@ -25,12 +25,12 @@ Space complexity: O(),  MB
 
 // real thing starts here
 type KthLargest struct {
-	Nums *model.IntMinHeap
+	Nums *model.IntHeap
 	K    int
 }
 
 func Constructor(k int, nums []int) KthLargest {
-	h := &model.IntMinHeap{}
+	h := &model.IntHeap{}
 	heap.Init(h)
 	// push all elements to the heap
 	for i := 0; i < len(nums); i++ {
