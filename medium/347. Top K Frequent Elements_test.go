@@ -1,7 +1,7 @@
 package medium
 
 import (
-	"container/heap"
+	"math/rand"
 	"testing"
 
 	"leetcode/uti"
@@ -39,32 +39,76 @@ func (h *topKFrequentHeap) Pop() any {
 // Time: O(nlogk)
 // Space: O(n)
 // Your algorithm's time complexity must be better than O(n log n)
+// func topKFrequent(nums []int, k int) []int {
+// 	n := len(nums)
+// 	if k > n {
+// 		return nums
+// 	}
+// 	seen := map[int]int{}
+// 	for _, num := range nums {
+// 		seen[num]++
+// 	}
+// 	topKFrequentHeap := topKFrequentHeap{}
+// 	heap.Init(&topKFrequentHeap)
+// 	for num, freq := range seen {
+// 		heap.Push(&topKFrequentHeap, topKFrequentHeapData{
+// 			val:       num,
+// 			frequency: freq,
+// 		})
+// 		for topKFrequentHeap.Len() > k {
+// 			heap.Pop(&topKFrequentHeap)
+// 		}
+// 	}
+// 	res := make([]int, 0, k)
+// 	for topKFrequentHeap.Len() > 0 {
+// 		data := topKFrequentHeap.Pop().(topKFrequentHeapData)
+// 		res = append(res, data.val)
+// 	}
+// 	return res
+// }
+
+// Time: Average O(n), Worst O()
+// Space: O(n)
 func topKFrequent(nums []int, k int) []int {
-	n := len(nums)
-	if k > n {
-		return nums
-	}
 	seen := map[int]int{}
 	for _, num := range nums {
 		seen[num]++
 	}
-	topKFrequentHeap := topKFrequentHeap{}
-	heap.Init(&topKFrequentHeap)
-	for num, freq := range seen {
-		heap.Push(&topKFrequentHeap, topKFrequentHeapData{
-			val:       num,
-			frequency: freq,
-		})
-		for topKFrequentHeap.Len() > k {
-			heap.Pop(&topKFrequentHeap)
+	unique := make([]int, 0, len(nums))
+	for num := range seen {
+		unique = append(unique, num)
+	}
+	
+	partition := func(left, right, pivotIndex int) int {
+		freq := seen[unique[pivotIndex]]
+		unique[pivotIndex], unique[right] = unique[right], unique[pivotIndex]
+		sortFreqIndex := left
+		for i := left; i < right; i++ {
+			if seen[unique[i]] < freq {
+				unique[sortFreqIndex], unique[i] = unique[i], unique[sortFreqIndex]
+				sortFreqIndex++
+			}
+		}
+		unique[sortFreqIndex], unique[right] = unique[right], unique[sortFreqIndex]
+		return sortFreqIndex
+	}
+
+	var quickSelect func(left, right, kSmallest int)
+	quickSelect = func(left, right, kSmallest int) {
+		if left >= right {
+			return
+		}
+
+		pivotIndex := left + rand.Intn(right-left+1)
+		sortFreqIndex := partition(left, right, pivotIndex)
+		if sortFreqIndex < kSmallest {
+			quickSelect(sortFreqIndex+1, right, kSmallest)
+		} else if sortFreqIndex > kSmallest {
+			quickSelect(left, sortFreqIndex-1, kSmallest)
 		}
 	}
-	res := make([]int, 0, k)
-	for topKFrequentHeap.Len() > 0 {
-		data := topKFrequentHeap.Pop().(topKFrequentHeapData)
-		res = append(res, data.val)
-	}
-	return res
+	quickSelect(0, len(unique)-1, len(unique)-k)
+	return unique[len(unique)-k:]
 }
 
 func TestTopKFrequent(t *testing.T) {
