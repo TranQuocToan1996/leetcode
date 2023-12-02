@@ -49,6 +49,8 @@ import (
 // 	return res
 // }
 
+// Time: O(n + k)
+// Space: O(1) skip the space result
 func findAnagrams(s string, p string) []int {
 	var res []int
 	countP := map[byte]int{}
