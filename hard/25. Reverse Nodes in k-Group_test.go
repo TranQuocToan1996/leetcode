@@ -16,13 +16,16 @@ func reverseKGroup(head *model.ListNode, k int) *model.ListNode {
 		node = node.Next
 		count++
 	}
-
-	privHead := reverseKGroup(node, k)
+	prev := reverseKGroup(node, k)
 	for count > 0 {
-		//
+		next := head.Next
+		head.Next = prev
+		prev = head
+		head = next
+		count--
 	}
 
-	return privHead
+	return prev
 }
 
 func TestReverseKGroup(t *testing.T) {
