@@ -38,20 +38,21 @@ import (
 // 	return root.Next
 // }
 
+// Time: O(nlogn)
+// Space: O(logn) for calltack. No extra space for node.
 func mergeKLists(lists []*model.ListNode) *model.ListNode {
-	n := len(lists)
-	if n == 0 {
+	if len(lists) == 0 {
 		return nil
 	}
-	if n == 1 {
-		return mergeTwoListNode(lists[0], nil)
-	}
-	root := &model.ListNode{}
-	for i := 0; i < n; i++ {
-		root.Next = mergeTwoListNode(root.Next, lists[i])
-	}
+	for len(lists) >= 2 {
+		// pop 2 lists
+		l1, l2 := lists[0], lists[1]
+		lists = lists[2:]
 
-	return root.Next
+		merged := mergeTwoListNode(l1, l2)
+		lists = append(lists, merged)
+	}
+	return lists[0]
 }
 
 func mergeTwoListNode(node1, node2 *model.ListNode) *model.ListNode {
