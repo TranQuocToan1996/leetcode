@@ -99,3 +99,30 @@ func TestFindAnagrams(t *testing.T) {
 		}
 	}
 }
+
+func isAnagram(s string, p string) bool {
+	lenS := len(s)
+	lenP := len(p)
+
+	if lenS != lenP {
+		return false
+	}
+
+	anagramMap := make(map[string]int)
+
+	for i := 0; i < lenS; i++ {
+		anagramMap[string(s[i])]++
+	}
+
+	for i := 0; i < lenP; i++ {
+		anagramMap[string(p[i])]--
+	}
+
+	for i := 0; i < lenS; i++ {
+		if anagramMap[string(s[i])] != 0 {
+			return false
+		}
+	}
+
+	return true
+}
