@@ -1,6 +1,7 @@
 package medium
 
 import (
+	"container/heap"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -57,29 +58,30 @@ func NewFoodRating(foods []string, cuisines []string, ratings []int) FoodRatings
 		foods:    make(map[string]*food),
 		cuisines: make(map[string]*foodHeap),
 	}
-	for i := 0; i < len(foods); i++ {
-		//
+	for i := range foods {
+		_, ok := foodRatings.cuisines[cuisines[i]]
+		if !ok {
+			foodRatings.cuisines[cuisines[i]] = &foodHeap{}
+		}
+		newFood := &food{
+			food:    foods[i],
+			cuisine: cuisines[i],
+			rating:  ratings[i],
+		}
+		heap.Push(foodRatings.cuisines[cuisines[i]], newFood)
+		foodRatings.foods[foods[i]] = newFood
 	}
 	return foodRatings
 }
 
 func (this *FoodRatings) ChangeRating(food string, newRating int) {
 	// Update rating by food
-	cuisineRating, ok := this.cuisineRating[food]
+	f, ok := this.foods[food]
 	if !ok {
 		return
 	}
-	cuisineRating.rating = newRating
-	this.cuisineRating[food] = cuisineRating
-
-	// Update highest rating
-	if needUpdateFoodRating(this.foodRating[cuisineRating.cuisine].rating, newRating,
-		this.foodRating[cuisineRating.cuisine].food, food) {
-		this.foodRating[cuisineRating.cuisine] = FoodRating{
-			food:   food,
-			rating: newRating,
-		}
-	}
+	f.rating = newRating
+	heap.Fix(this.cuisines[f.cuisine], f.heapIndex)
 }
 
 func (this *FoodRatings) HighestRated(cuisine string) string {
