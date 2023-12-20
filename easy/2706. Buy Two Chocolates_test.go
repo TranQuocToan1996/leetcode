@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+// Time: O(n)
+// Space: O(1)
 func buyChoco(prices []int, money int) int {
 	first, second := math.MaxInt, math.MaxInt
 	for i := range prices {
