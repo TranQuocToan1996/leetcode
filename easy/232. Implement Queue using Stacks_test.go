@@ -56,4 +56,6 @@ func TestMyQueue(t *testing.T) {
 	assert.True(t, queue.Peek() == 1)
 	assert.True(t, queue.Pop() == 1)
 	assert.True(t, !queue.Empty())
+	assert.True(t, queue.Pop() == 2)
+	assert.True(t, queue.Empty())
 }
